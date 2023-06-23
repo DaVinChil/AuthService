@@ -1,4 +1,4 @@
-package com.hm.authservice;
+package com.hm.authservice.exception;
 
 public class UnauthorizedUser extends RuntimeException{
     public UnauthorizedUser(String msg){

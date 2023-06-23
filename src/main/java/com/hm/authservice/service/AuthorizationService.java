@@ -1,7 +1,11 @@
-package com.hm.authservice;
+package com.hm.authservice.service;
 
+import com.hm.authservice.repository.UserRepository;
+import com.hm.authservice.exception.InvalidCredentials;
+import com.hm.authservice.exception.UnauthorizedUser;
+import com.hm.authservice.model.Authorities;
+import com.hm.authservice.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,20 +13,22 @@ import java.util.List;
 @Service
 public class AuthorizationService {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     public AuthorizationService(UserRepository userRepository){
         this.userRepository = userRepository;
     }
 
-    List<Authorities> getAuthorities(String user, String password){
-        if(isEmpty(user) || isEmpty(password)){
+    public List<Authorities> getAuthorities(User user){
+        String name = user.getUser();
+        String password = user.getPassword();
+        if(isEmpty(name) || isEmpty(password)){
             throw new InvalidCredentials("User name or password is empty");
         }
-        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user, password);
+        List<Authorities> userAuthorities = userRepository.getUserAuthorities(name, password);
         if(isEmpty(userAuthorities)){
-            throw new UnauthorizedUser("Unknown user " + user);
+            throw new UnauthorizedUser("Unknown user " + name);
         }
 
         return userAuthorities;

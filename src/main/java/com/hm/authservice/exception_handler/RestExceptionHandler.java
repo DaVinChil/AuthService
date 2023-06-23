@@ -1,5 +1,7 @@
-package com.hm.authservice;
+package com.hm.authservice.exception_handler;
 
+import com.hm.authservice.exception.InvalidCredentials;
+import com.hm.authservice.exception.UnauthorizedUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

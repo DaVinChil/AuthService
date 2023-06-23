@@ -1,5 +1,6 @@
-package com.hm.authservice;
+package com.hm.authservice.repository;
 
+import com.hm.authservice.model.Authorities;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
